@@ -1,59 +1,65 @@
-
-
 package com.feebe.feebe;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+public class ImageConformationActivity extends AppCompatActivity {
 
-
-public class MainActivity extends ActionBarActivity {
-
-
-    private Button camButton;
-    private Button textButton;
+    private ImageView prescription;
+    private Button confirm,retry,cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_image_conformation);
 
-        camButton= (Button)findViewById(R.id.CameraButton);
-        textButton= (Button)findViewById(R.id.TextButton);
+        prescription = (ImageView) findViewById(R.id.Prescription);
+        prescription.setImageBitmap((Bitmap) getIntent().getExtras().get("img"));
 
-        camButton.setOnClickListener(new View.OnClickListener() {
+        confirm = (Button) findViewById(R.id.Confirm);
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ToDo: Open new intent and send image to merchant app
+            }
+        });
+
+        retry = (Button) findViewById(R.id.Retry);
+        retry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,0);
             }
         });
-
-        textButton.setOnClickListener(new View.OnClickListener() {
+        cancel = (Button) findViewById(R.id.Cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,List_Activity.class);
+                Intent intent = new Intent(ImageConformationActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Intent intent= new Intent(MainActivity.this,ImageConformationActivity.class);
-        intent.putExtra("img",data.getParcelableExtra("data"));
 
-        startActivity(intent);
+        prescription.setImageBitmap((Bitmap) data.getParcelableExtra("data"));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_init, menu);
+        getMenuInflater().inflate(R.menu.menu_image_conformation, menu);
         return true;
     }
 

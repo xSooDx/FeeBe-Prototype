@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">FeeBe</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_image_conformation">ImageConformationActivity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_list_">List_Activity</string>
 </resources>
