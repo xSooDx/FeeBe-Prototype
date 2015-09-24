@@ -27,7 +27,9 @@ public class ImageConformationActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ToDo: Open new intent and send image to merchant app
+                Intent intent = new Intent(ImageConformationActivity.this,LocationActivity.class);
+                intent.putExtra("data",(Bitmap)getIntent().getExtras().get("img"));
+                startActivity(intent);
             }
         });
 
